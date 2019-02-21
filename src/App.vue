@@ -2,7 +2,8 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link to="/about">About</router-link> |
+      <router-link to="/instructions">Instructions</router-link>
     </div>
     <router-view/>
   </div>
@@ -16,5 +17,10 @@
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+
+}
+
+body {
+  /* background-image: url('/assets/images/guitarBackground.jpeg') blue; */
 }
 </style>
