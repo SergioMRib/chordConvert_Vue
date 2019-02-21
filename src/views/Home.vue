@@ -2,9 +2,9 @@
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png">
     <div id="container">
-      <Lists />
-      <Lists />
       <SongList />
+      <Lists v-bind:itemsList="chords"/>
+      <Lists v-bind:itemsList="modifiers"/>
     </div>
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   </div>
@@ -57,7 +57,7 @@ export default {
             pos:8,
             name:"E"
         },
-        {
+         {
             pos:9,
             name:"F"
         },
@@ -75,10 +75,37 @@ export default {
         }
       ],
       modifiers: [
-        {}
+        {
+          pos:1,
+          name:"m"},
+        {
+          pos:2,
+          name: "M"
+        },
+        {
+          pos:3,
+          name:"7"},
+        {
+          pos:4,
+          name:"9"
+        },
+        {
+          pos:5,
+          name:"sus"
+          },
+        {
+          pos:6,
+          name:"dim"
+        }
       ]
     }
   }
 }
 </script>
 
+<style scoped>
+  #container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+</style>
