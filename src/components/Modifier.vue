@@ -1,5 +1,3 @@
-<-- This will be used for chords -->
-
 <template>
     <div>
         {{item.name}}
@@ -8,7 +6,7 @@
 
 <script>
 export default {
-    name: 'chord-item',
+    name: 'modifier-item',
     props: ['item']
 }
 </script>

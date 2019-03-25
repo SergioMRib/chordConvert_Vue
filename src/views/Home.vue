@@ -1,11 +1,21 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
     <div id="container">
       <SongList />
-      <Lists v-bind:itemsList="chords"/>
-      <Lists v-bind:itemsList="modifiers"/>
+
+      <Lists
+          v-bind:key="item.pos"
+          v-for="item in chords">
+        <Chord v-bind:item="item"/>
+      </Lists>
+
+      <Lists
+          v-bind:key="item.pos"
+          v-for="item in modifiers">
+        <Modifier v-bind:item="item"/>
+      </Lists>
     </div>
+
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   </div>
 </template>
@@ -14,13 +24,17 @@
 // @ is an alias to /src
 import Lists from '../components/Lists.vue';
 import SongList from '../components/SongList.vue';
+import Chord from '../components/Chord.vue';
+import Modifier from '../components/Modifier.vue';
 /* import HelloWorld from '@/components/HelloWorld.vue' */
 
 export default {
   name: 'home',
   components: {
     Lists,
-    SongList
+    SongList,
+    Chord,
+    Modifier
     /* HelloWorld */
   },
   data() {
@@ -106,6 +120,6 @@ export default {
 <style scoped>
   #container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 5fr 1fr 1fr;
   }
 </style>

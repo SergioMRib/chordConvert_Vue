@@ -1,15 +1,19 @@
 <-- this is for both chords and modifiers list -->
 
 <template>
-    <div class="list">
-        <div v-bind:key="item.pos" v-for="item in itemsList">
-            <p>{{item.name}}</p>
-        </div>
-    </div>
+    <ul>
+        <slot></slot>
+    </ul>
 </template>
 
 <script>
+import Chord from './Chord.vue'
+
 export default {
+    name: 'lists',
+    components: {
+        Chord
+    },
     props: ["itemsList"],
 
 }
