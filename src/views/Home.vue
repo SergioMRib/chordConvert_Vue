@@ -1,19 +1,32 @@
 <template>
   <div class="home">
     <div id="container">
-      <SongList />
 
-      <Lists
-          v-bind:key="item.pos"
-          v-for="item in chords">
-        <Chord v-bind:item="item"/>
-      </Lists>
+      <ul>
+        <SongList
+          v-bind:key="item.id"
+          v-for="item in songChords"
+          v-bind:item="item"
+          v-on:selected="removeChord">
+        </SongList>
+      </ul>
 
-      <Lists
+      <ul>
+        <Chord
           v-bind:key="item.pos"
-          v-for="item in modifiers">
-        <Modifier v-bind:item="item"/>
-      </Lists>
+          v-for="item in chords"
+          v-bind:item="item"
+          v-on:selected="addChord">
+        </Chord>
+      </ul>
+
+      <ul>
+        <Modifier
+            v-bind:key="item.pos"
+            v-for="item in modifiers"
+            v-bind:item="item">
+        </Modifier>
+      </ul>
     </div>
 
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
@@ -22,6 +35,8 @@
 
 <script>
 // @ is an alias to /src
+import uuid from 'uuid'
+
 import Lists from '../components/Lists.vue';
 import SongList from '../components/SongList.vue';
 import Chord from '../components/Chord.vue';
@@ -111,7 +126,24 @@ export default {
           pos:6,
           name:"dim"
         }
-      ]
+      ],
+      songChords: []
+    }
+  },
+  methods: {
+    hello: function(data) {
+      console.log(data.name + " and position is: " + data.pos)
+    },
+    addChord: function(data) {
+      const newChord = {
+        id: uuid.v4(),
+        pos: data.pos,
+        name: data.name
+      };
+      this.songChords.push(newChord)
+    },
+    removeChord: function(data) {
+      console.log(data.id)
     }
   }
 }
@@ -120,6 +152,6 @@ export default {
 <style scoped>
   #container {
     display: grid;
-    grid-template-columns: 5fr 1fr 1fr;
+    grid-template-columns: 7fr 1fr 1fr;
   }
 </style>

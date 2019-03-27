@@ -1,7 +1,22 @@
 <-- This will be for the list of chords of the song -->
 
 <template>
-    <div>
-        <h1>Will contain the hole song list</h1>
-    </div>
+    <span v-on:click="selected(item)">
+        {{item.name}}
+    </span>
 </template>
+
+<script>
+export default {
+    name: 'song-list',
+    props: ['item'],
+    data() {
+        return {}
+    },
+    methods: {
+        selected: function(data) {
+            this.$emit('selected', data)
+        }
+    }
+}
+</script>
