@@ -138,12 +138,17 @@ export default {
       const newChord = {
         id: uuid.v4(),
         pos: data.pos,
-        name: data.name
+        name: data.name,
+        mod: "",
+        index: ""
       };
       this.songChords.push(newChord)
-    },
+      let val = this.songChords.indexOf(newChord)
+      this.songChords[val].index = val
+      },
     removeChord: function(data) {
       console.log(data.id)
+      console.log(data.index + " este é o index clicado")
     }
   }
 }
@@ -153,5 +158,9 @@ export default {
   #container {
     display: grid;
     grid-template-columns: 7fr 1fr 1fr;
+  }
+
+  ul {
+    list-style-type: none;
   }
 </style>

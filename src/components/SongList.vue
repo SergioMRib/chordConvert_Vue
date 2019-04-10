@@ -2,7 +2,7 @@
 
 <template>
     <span v-on:click="selected(item)">
-        {{item.name}}
+        {{item.name}}{{item.mod}}
     </span>
 </template>
 
