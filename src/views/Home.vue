@@ -140,15 +140,12 @@ export default {
         pos: data.pos,
         name: data.name,
         mod: "",
-        index: ""
       };
       this.songChords.push(newChord)
-      let val = this.songChords.indexOf(newChord)
-      this.songChords[val].index = val
-      },
+    },
     removeChord: function(data) {
-      console.log(data.id)
-      console.log(data.index + " este é o index clicado")
+      let index = this.songChords.findIndex(x => x.id === data.id)
+      this.songChords.splice(index, 1)
     }
   }
 }

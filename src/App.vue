@@ -21,9 +21,7 @@
   color: #2c3e50;
   margin-top: 0px;
 }
-router-link:hover {
-  color: red
-}
+
 
 h1 {
   font-size: 20px
