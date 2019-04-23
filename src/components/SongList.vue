@@ -15,6 +15,7 @@ export default {
     },
     methods: {
         selected: function(data) {
+
             this.$emit('selected', data)
         }
     }

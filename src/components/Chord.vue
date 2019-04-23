@@ -58,5 +58,9 @@ li:active {
    background: #1b435e;
 }
 
+li.selected {
+    color: red;
+}
+
 </style>
 

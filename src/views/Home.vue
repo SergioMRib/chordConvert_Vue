@@ -2,16 +2,18 @@
   <div class="home">
     <div id="container">
 
-      <ul>
-        <SongList
+      <ul class="song-list">
+        <Chord
           v-bind:key="item.id"
           v-for="item in songChords"
           v-bind:item="item"
-          v-on:selected="removeChord">
-        </SongList>
+          v-on:selected="selectChord"
+          v-on:click="selectChord"
+          v-bind:class="{selected: item.selected}">
+        </Chord>
       </ul>
 
-      <ul>
+      <ul class="list-of-chords">
         <Chord
           v-bind:key="item.pos"
           v-for="item in chords"
@@ -20,7 +22,7 @@
         </Chord>
       </ul>
 
-      <ul>
+      <ul classs="list-of-modifiers">
         <Modifier
             v-bind:key="item.pos"
             v-for="item in modifiers"
@@ -38,7 +40,7 @@
 import uuid from 'uuid'
 
 import Lists from '../components/Lists.vue';
-import SongList from '../components/SongList.vue';
+// import SongList from '../components/SongList.vue';
 import Chord from '../components/Chord.vue';
 import Modifier from '../components/Modifier.vue';
 /* import HelloWorld from '@/components/HelloWorld.vue' */
@@ -47,7 +49,7 @@ export default {
   name: 'home',
   components: {
     Lists,
-    SongList,
+    /* SongList, */
     Chord,
     Modifier
     /* HelloWorld */
@@ -135,17 +137,38 @@ export default {
       console.log(data.name + " and position is: " + data.pos)
     },
     addChord: function(data) {
+      /**
+       *
+        */
+      this.songChords.forEach(function (element) {
+        element.selected = false;
+      });
       const newChord = {
         id: uuid.v4(),
         pos: data.pos,
         name: data.name,
         mod: "",
+        selected: true
       };
-      this.songChords.push(newChord)
+      this.songChords.push(newChord);
     },
     removeChord: function(data) {
       let index = this.songChords.findIndex(x => x.id === data.id)
       this.songChords.splice(index, 1)
+    },
+    selectChord: function(data) {
+      this.songChords.forEach(function (element) {
+        element.selected = false;
+      })
+      data.selected = true
+    }
+
+  },
+  computed: {
+    getActiveChord: function() {
+      /* still in development */
+      let index = this.songChords.findIndex(x => x.selected === true)
+      return this.songChords[index]
     }
   }
 }
