@@ -26,7 +26,8 @@
         <Modifier
             v-bind:key="item.pos"
             v-for="item in modifiers"
-            v-bind:item="item">
+            v-bind:item="item"
+            v-on:selected="addModifier">
         </Modifier>
       </ul>
     </div>
@@ -139,7 +140,8 @@ export default {
     addChord: function(data) {
       /**
        *
-        */
+      */
+      console.log("added a chord")
       this.songChords.forEach(function (element) {
         element.selected = false;
       });
@@ -157,16 +159,23 @@ export default {
       this.songChords.splice(index, 1)
     },
     selectChord: function(data) {
+      console.log('selected this chord')
       this.songChords.forEach(function (element) {
         element.selected = false;
       })
       data.selected = true
+      console.log(this.activeChord)
+    },
+    addModifier: function(data) {
+      console.log("hello")
+      if (typeof(this.activeChord) !== 'undefined') {
+        this.activeChord.mod += data.name
+      }
     }
-
   },
   computed: {
-    getActiveChord: function() {
-      /* still in development */
+    activeChord: function() {
+        /* still in development */
       let index = this.songChords.findIndex(x => x.selected === true)
       return this.songChords[index]
     }

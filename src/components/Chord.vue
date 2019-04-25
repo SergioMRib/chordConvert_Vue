@@ -1,8 +1,7 @@
-<-- This will be used for chords -->
 
 <template>
     <li v-on:click="selected(item)">
-        {{item.name}}
+        {{item.name}}{{item.mod}}
     </li>
 </template>
 
@@ -15,6 +14,7 @@ export default {
     },
     methods: {
         selected: function(data) {
+            console.log("emitted from chord")
             this.$emit('selected', data)
         }
     }
