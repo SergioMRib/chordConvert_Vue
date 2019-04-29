@@ -30,6 +30,22 @@
             v-on:selected="addModifier">
         </Modifier>
       </ul>
+      <div>
+        <button
+          v-on:click="removeChord">
+          Delete chord
+        </button>
+        <button
+          v-on:click="songChords = []">
+          Clear all
+        </button>
+      </div>
+      <div>
+        <button
+          v-on:click="removeChord"
+          >UP</button>
+        <button>Down</button>
+      </div>
     </div>
 
     <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
@@ -40,7 +56,7 @@
 // @ is an alias to /src
 import uuid from 'uuid'
 
-import Lists from '../components/Lists.vue';
+
 // import SongList from '../components/SongList.vue';
 import Chord from '../components/Chord.vue';
 import Modifier from '../components/Modifier.vue';
@@ -49,7 +65,6 @@ import Modifier from '../components/Modifier.vue';
 export default {
   name: 'home',
   components: {
-    Lists,
     /* SongList, */
     Chord,
     Modifier
@@ -154,9 +169,14 @@ export default {
       };
       this.songChords.push(newChord);
     },
-    removeChord: function(data) {
-      let index = this.songChords.findIndex(x => x.id === data.id)
-      this.songChords.splice(index, 1)
+    removeChord: function() {
+      console.log("removed the chord")
+      if (typeof(this.activeChord) !== 'undefined') {
+        let index = this.songChords.findIndex(x => x.id === this.activeChord.id)
+        this.songChords.splice(index, 1)
+      } else {
+        console.log("select a chord");
+      }
     },
     selectChord: function(data) {
       console.log('selected this chord')
