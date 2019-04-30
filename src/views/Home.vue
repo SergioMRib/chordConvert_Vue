@@ -42,9 +42,13 @@
       </div>
       <div>
         <button
-          v-on:click="removeChord"
-          >UP</button>
-        <button>Down</button>
+          v-on:click="convert(1)">
+          UP
+        </button>
+        <button
+          v-on:click="convert(-1)">
+          Down
+        </button>
       </div>
     </div>
 
@@ -73,51 +77,51 @@ export default {
   data() {
     return {
       chords: [{
-            pos:1,
+            pos:0,
             name:"A"
         },
         {
-            pos:2,
+            pos:1,
             name: "A#"
         },
         {
-            pos:3,
+            pos:2,
             name:"B"
         },
         {
-            pos:4,
+            pos:3,
             name:"C"
         },
         {
-            pos:5,
+            pos:4,
             name:"C#"
         },
         {
-            pos:6,
+            pos:5,
             name:"D"
         },
         {
-            pos:7,
+            pos:6,
             name:"D#"
         },
         {
-            pos:8,
+            pos:7,
             name:"E"
         },
          {
-            pos:9,
+            pos:8,
             name:"F"
         },
         {
-            pos:10,
+            pos:9,
             name:"F#"
         },
         {
-            pos:11,
+            pos:10,
             name:"G"
         },
         {
-            pos:12,
+            pos:11,
             name:"G#"
         }
       ],
@@ -191,6 +195,27 @@ export default {
       if (typeof(this.activeChord) !== 'undefined') {
         this.activeChord.mod += data.name
       }
+    },
+    convert: function(direction) {
+      /**
+       * for each element of the songChords update its .name and .pos properties
+       */
+      console.log("raise the chords " + direction);
+
+      // gets the current list of chord positions and increases/decreases
+      this.songChords.forEach( element => {
+
+        let val = element.pos + direction;
+        if (val > 11) {
+          val = 0;
+        };
+        if (val < 0 ) {
+          val = 11;
+        };
+
+        element.name = this.chords[val].name;
+        element.pos = val;
+      });
     }
   },
   computed: {
