@@ -224,6 +224,18 @@ export default {
       let index = this.songChords.findIndex(x => x.selected === true)
       return this.songChords[index]
     }
+  },
+  mounted() {
+    if (localStorage.chords) {
+        this.songChords = JSON.parse(sessionStorage.getItem("chords"))
+    }
+  },
+  watch: {
+    songChords: function () {
+      if (typeof(Storage) !== "undefined") {
+        sessionStorage.setItem('chords', JSON.stringify(this.songChords))
+      }
+    }
   }
 }
 </script>
