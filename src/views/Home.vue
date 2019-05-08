@@ -13,42 +13,42 @@
         </Chord>
       </ul>
 
-      <ul class="list-of-chords">
-        <Chord
-          v-bind:key="item.pos"
-          v-for="item in chords"
-          v-bind:item="item"
-          v-on:selected="addChord">
-        </Chord>
-      </ul>
-
-      <ul classs="list-of-modifiers">
-        <Modifier
+      <div id="usables">
+        <ul class="list-of-chords">
+          <Chord
             v-bind:key="item.pos"
-            v-for="item in modifiers"
+            v-for="item in chords"
             v-bind:item="item"
-            v-on:selected="addModifier">
-        </Modifier>
-      </ul>
-      <div>
-        <button
-          v-on:click="removeChord">
-          Delete chord
-        </button>
-        <button
-          v-on:click="songChords = []">
-          Clear all
-        </button>
-      </div>
-      <div>
-        <button
-          v-on:click="convert(1)">
-          UP
-        </button>
-        <button
-          v-on:click="convert(-1)">
-          Down
-        </button>
+            v-on:selected="addChord">
+          </Chord>
+        </ul>
+
+        <ul class="list-of-modifiers">
+          <Modifier
+              v-bind:key="item.pos"
+              v-for="item in modifiers"
+              v-bind:item="item"
+              v-on:selected="addModifier">
+          </Modifier>
+        </ul>
+        <div class="action-buttons">
+          <button
+            v-on:click="removeChord">
+            <font-awesome-icon icon="eraser" />
+          </button>
+          <button
+            v-on:click="convert(1)">
+            <font-awesome-icon icon="arrow-alt-circle-up" />
+          </button>
+          <button
+            v-on:click="songChords = []">
+            <font-awesome-icon icon="trash" />
+          </button>
+          <button
+            v-on:click="convert(-1)">
+            <font-awesome-icon icon="arrow-alt-circle-up" />
+          </button>
+        </div>
       </div>
     </div>
 
@@ -227,7 +227,7 @@ export default {
   },
   mounted() {
     if (localStorage.chords) {
-        this.songChords = JSON.parse(sessionStorage.getItem("chords"))
+        this.songChords = JSON.parse(sessionStorage.chords)
     }
   },
   watch: {
@@ -242,11 +242,28 @@ export default {
 
 <style scoped>
   #container {
+
+  }
+
+  #usables {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
     display: grid;
-    grid-template-columns: 7fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+
+  .list-of-chords {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  .list-of-modifiers, .action-buttons{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   }
 
   ul {
     list-style-type: none;
+    padding: 0;
   }
 </style>
