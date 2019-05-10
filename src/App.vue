@@ -4,7 +4,6 @@
       <h1>Chord transposer</h1>
 
       <font-awesome-icon icon="bars" v-on:click="hideNav"/>
-
       <div id="nav" class="hidden" v-on:click="hideNav">
         <p><router-link to="/">Home</router-link></p>
         <p><router-link to="/about">About</router-link></p>
@@ -32,19 +31,22 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: rgb(177, 234, 248);
   margin-top: 0px;
+  font-size: 20px;
 }
 
 header {
   display: grid;
-  grid-template-columns: 8fr 1fr;
+  grid-template-columns: 1fr 8fr 1fr;
+  justify-items: stretch;
+  align-items: stretch;
 }
 
 h1 {
   margin-top: 0px;
   margin-left: 1em;
-  font-size: 20px;
+  font-size: 1.2em;
   text-align: left;
   display: inline;
 }
@@ -61,10 +63,15 @@ h1 {
 .hidden {
   visibility: hidden;
 }
+.svg-inline--fa {
+    font-size: 1.2em;
+}
 
 body {
   margin: 5px 0px 0px 0px;
-  background-color: aliceblue;
+  background-color: rgb(57, 73, 96);
   /* background-image: url('/assets/images/guitarBackground.jpeg') blue; */
 }
+
+
 </style>

@@ -9,7 +9,8 @@
           v-bind:item="item"
           v-on:selected="selectChord"
           v-on:click="selectChord"
-          v-bind:class="{selected: item.selected}">
+          v-bind:class="{selected: item.selected, fullLine: item.fullLine}"
+          class="song-list-chord">
         </Chord>
       </ul>
 
@@ -19,7 +20,8 @@
             v-bind:key="item.pos"
             v-for="item in chords"
             v-bind:item="item"
-            v-on:selected="addChord">
+            v-on:selected="addChord"
+            class="chord-selectable">
           </Chord>
         </ul>
 
@@ -28,7 +30,8 @@
               v-bind:key="item.pos"
               v-for="item in modifiers"
               v-bind:item="item"
-              v-on:selected="addModifier">
+              v-on:selected="addModifier"
+              class="modifier-selectable">
           </Modifier>
         </ul>
         <div class="action-buttons">
@@ -47,6 +50,10 @@
           <button
             v-on:click="convert(-1)">
             <font-awesome-icon icon="arrow-alt-circle-up" />
+          </button>
+          <button id="add-line-button"
+            v-on:click="addLine">
+            <font-awesome-icon icon="level-down-alt" />
           </button>
         </div>
       </div>
@@ -171,6 +178,15 @@ export default {
         mod: "",
         selected: true
       };
+
+      if (typeof(data.fullLine) !== 'undefined') {
+        /* statement to aid in adding an empty line
+         * Don't like this because it mixis stuff
+         * TO CHANGE
+         */
+        newChord.fullLine = data.fullLine;
+      };
+
       this.songChords.push(newChord);
     },
     removeChord: function() {
@@ -184,10 +200,10 @@ export default {
     },
     selectChord: function(data) {
       console.log('selected this chord')
-      this.songChords.forEach(function (element) {
+      /* this.songChords.forEach(function (element) {
         element.selected = false;
-      })
-      data.selected = true
+      }) */
+      data.selected = !data.selected // toggles true and false
       console.log(this.activeChord)
     },
     addModifier: function(data) {
@@ -216,6 +232,15 @@ export default {
         element.name = this.chords[val].name;
         element.pos = val;
       });
+    },
+    addLine: function() {
+      /* Creates a new empty chord object that fills all cells of the grid
+       * in development
+       */
+      let emptyChord = {pos: "", name: "", fullLine: true};
+      this.addChord(emptyChord);
+
+      console.log("added line");
     }
   },
   computed: {
@@ -241,25 +266,81 @@ export default {
 </script>
 
 <style scoped>
-  #container {
 
+  #container {
+    background-color: rgb(57, 73, 96);
   }
 
+  .song-list {
+    display: grid;
+    box-sizing: border-box;
+    padding: 5px;
+    grid-template-columns: repeat(8,1fr);
+    grid-gap: 7px;
+  }
+
+  .song-list-chord {
+
+    font-size: 1.3em;
+    color: #fd9800;
+    font-weight: bold;
+  }
+  .fullLine {
+    grid-column-end: -1;
+    background-color: red;
+  }
   #usables {
     position: fixed;
-    bottom: 0;
+    bottom: 5px;
     width: 100%;
+    padding: 1px;
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
+    grid-gap: 3px;
+    background-color: #70480c;
   }
 
-  .list-of-chords {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+  .chord-selectable, .modifier-selectable {
+    font-size: 1em;
+    vertical-align: middle;
+    line-height: 2em;
+    border-right: 2px solid #555f72;
+    border-bottom: 2px solid #555f72;
+    border-radius: 5px;
+    background-color: #26334a;
   }
-  .list-of-modifiers, .action-buttons{
+
+  .modifier-selectable {
+    color: rgb(54, 184, 166);
+    background-color: #698c7b;
+  }
+
+  .list-of-chords, .list-of-modifiers, .action-buttons {
     display: grid;
+    grid-gap: 2px;
+    justify-items: stretch;
+    align-items: stretch;
+    margin: 0;
+  }
+  .list-of-chords {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: repeat(3, 2em);
+  }
+  .list-of-modifiers {
     grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, 2em);
+  }
+
+  .action-buttons{
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, 2em);
+    margin: 0;
+  }
+  .svg-inline--fa {
+    font-size: 1.5em;
+  }
+  #add-line-button {
+    grid-column: span 2;
   }
 
   ul {
