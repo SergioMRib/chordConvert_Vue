@@ -223,10 +223,10 @@ export default {
           let val = element.pos + direction;
           if (val > 11) {
             val = 0;
-          };
+          }
           if (val < 0 ) {
             val = 11;
-          };
+          }
 
           element.name = this.chords[val].name;
           element.pos = val;
