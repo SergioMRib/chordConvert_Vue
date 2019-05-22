@@ -179,30 +179,28 @@ export default {
         selected: true
       };
 
-      if (typeof(data.fullLine) !== 'undefined') {
-        /* statement to aid in adding an empty line
-         * Don't like this because it mixis stuff
-         * TO CHANGE
-         */
-        newChord.fullLine = data.fullLine;
-      };
-
       this.songChords.push(newChord);
     },
     removeChord: function() {
       console.log("removed the chord")
+
       if (typeof(this.activeChord) !== 'undefined') {
+        // remove it
         let index = this.songChords.findIndex(x => x.id === this.activeChord.id)
         this.songChords.splice(index, 1)
+
+        // select the next chord
+        this.songChords[index].selected = true;
+
       } else {
         console.log("select a chord");
       }
     },
     selectChord: function(data) {
       console.log('selected this chord')
-      /* this.songChords.forEach(function (element) {
+      this.songChords.forEach(function (element) {
         element.selected = false;
-      }) */
+      })
       data.selected = !data.selected // toggles true and false
       console.log(this.activeChord)
     },
@@ -220,25 +218,34 @@ export default {
 
       // gets the current list of chord positions and increases/decreases
       this.songChords.forEach( element => {
+        if (element.fullLine != true) {
 
-        let val = element.pos + direction;
-        if (val > 11) {
-          val = 0;
-        };
-        if (val < 0 ) {
-          val = 11;
-        };
+          let val = element.pos + direction;
+          if (val > 11) {
+            val = 0;
+          };
+          if (val < 0 ) {
+            val = 11;
+          };
 
-        element.name = this.chords[val].name;
-        element.pos = val;
+          element.name = this.chords[val].name;
+          element.pos = val;
+        }
       });
     },
     addLine: function() {
       /* Creates a new empty chord object that fills all cells of the grid
-       * in development
+       *
        */
-      let emptyChord = {pos: "", name: "", fullLine: true};
-      this.addChord(emptyChord);
+      let emptyChord = {
+        id: uuid.v4(),
+        pos: "",
+        name: "_",
+        mod: "",
+        fullLine: true,
+        selected: false
+      };
+      this.songChords.push(emptyChord);
 
       console.log("added line");
     }
@@ -260,7 +267,7 @@ export default {
       if (typeof(Storage) !== "undefined") {
         sessionStorage.setItem('chords', JSON.stringify(this.songChords))
       }
-    }
+    },
   }
 }
 </script>
@@ -287,7 +294,7 @@ export default {
   }
   .fullLine {
     grid-column-end: -1;
-    background-color: red;
+
   }
   #usables {
     position: fixed;
