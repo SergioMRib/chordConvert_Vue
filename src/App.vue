@@ -3,7 +3,7 @@
     <header>
       <h1>Chord transposer</h1>
 
-      <font-awesome-icon icon="bars" v-on:click="hideNav"/>
+      <font-awesome-icon class="menu-bars" icon="bars" v-on:click="hideNav"/>
       <div id="nav" class="hidden" v-on:click="hideNav">
         <p><router-link to="/">Home</router-link></p>
         <p><router-link to="/about">About</router-link></p>
@@ -54,17 +54,24 @@ h1 {
 #nav {
   position: fixed;
   right: 0;
-  top: 20px;
+  top: 40px;
+  width: 40%;
   margin: 3px;
-  padding: 10px 0px 10px 0px;
-  text-align: left;
-  background-color: white;
+  padding: 10px 5px 10px 5px;
+  background-color: #698c7b;
+  border-radius: 5px;
 }
 .hidden {
   visibility: hidden;
 }
 .svg-inline--fa {
-    font-size: 1.2em;
+    font-size: 1.5em;
+}
+
+a {
+  line-height: 3em;
+  color: white;
+  text-decoration: none;
 }
 
 body {
