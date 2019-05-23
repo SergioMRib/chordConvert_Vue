@@ -46,7 +46,7 @@ header {
 h1 {
   margin-top: 0px;
   margin-left: 1em;
-  font-size: 1.2em;
+  font-size: 1em;
   text-align: left;
   display: inline;
 }
@@ -66,6 +66,9 @@ h1 {
 }
 .svg-inline--fa {
     font-size: 1.5em;
+}
+.menu-bars {
+  grid-column-end: -1;
 }
 
 a {
