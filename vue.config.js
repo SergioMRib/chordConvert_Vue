@@ -1,4 +1,4 @@
 module.exports = {
-    publicPath: "/chord-converter-app",
+    publicPath: "/chordConvert_Vue/",
     outputDir: "docs"
   };

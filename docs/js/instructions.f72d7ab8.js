@@ -1,2 +1,2 @@
 (window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["instructions"],{dd5a:function(n,e,t){"use strict";t.r(e);var r=function(){var n=this,e=n.$createElement;n._self._c;return n._m(0)},l=[function(){var n=this,e=n.$createElement,t=n._self._c||e;return t("div",[t("h1",[n._v("Instructions")]),t("ol",[t("li",[n._v("One by one add all chords to your song by clicking")]),t("li",[n._v('Click on new line or "Enter" key to insert a new line')]),t("li",[n._v("Transpose all the chords using the arrows or the arrow buttons")]),t("li",[n._v("Delete chord by clicking")])])])}],o=t("2877"),i={},s=Object(o["a"])(i,r,l,!1,null,null,null);e["default"]=s.exports}}]);
-//# sourceMappingURL=instructions.46d04c5d.js.map
+//# sourceMappingURL=instructions.f72d7ab8.js.map
